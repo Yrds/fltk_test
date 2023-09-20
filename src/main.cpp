@@ -29,15 +29,10 @@ int main(int argc, char **argv) {
     button->copy_label(label.c_str());
 
     (*button)([i](const Fl_Widget* w) {
-      //TODO Figureout why "i" is not being copied
-      //auto widget = static_cast<styled::Widget<Fl_Button>*>(w);
 
       std::cout << "You clicked me(" << i << ")" << std::endl;
     });
   }
-
-
-
 
   //{
 

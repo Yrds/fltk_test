@@ -17,6 +17,8 @@ struct Widget: public W {
 
   inline static int nextId = 0;
 
+  std::function<void(Fl_Widget*)> cb;
+
   template <typename... Args>
   Widget(const Args ...args): W(args...), id(nextId++) { }
 
@@ -32,24 +34,13 @@ struct Widget: public W {
 
   void operator()(std::function<void(Fl_Widget*)> cb) {
 
-    this->callback([](Fl_Widget* widget, void* data) {
-
-      const auto callback = static_cast<std::function<void(Fl_Widget*)>* >(data);
-
-      (*callback)(widget);
-
-    }, &cb);
-  }
-
-  void cb(std::function<void(Fl_Widget*)> cb) {
+    this->cb = cb;
 
     this->callback([](Fl_Widget* widget, void* data) {
 
-      const auto callback = static_cast<std::function<void(Fl_Widget*)>* >(data);
+      static_cast<styled::Widget<W>*>(widget)->cb(widget);
 
-      (*callback)(widget);
-
-    }, &cb);
+    });
   }
 
 };
