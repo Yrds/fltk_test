@@ -1,8 +1,7 @@
 ## Build
 
-`meson setup build`
-`meson compile -C build'
+- `meson setup build`
+- `meson compile -C build'
 
-a binary with be available on `./build/fltk_helloworld`
-
+A binary will be available on `./build/fltk_helloworld`
 
